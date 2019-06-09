@@ -10,35 +10,47 @@
   </head>
 
   <body>
-      <section class="hero is-primary is-medium">
-          <div class="hero-head">
-              <nav class="navbar">
-                  <div class="container">
-                      <div class="navbar-brand">
-                          <%= link_to 'Linkoad blog', root_path, class: 'navbar-item' %>
-                          <span class="navbar-burger burguer" data-target="navbarMenuHeroA">
-                                <span></span>
-                                <span></span>
-                                <span></span>
-                          </span>
-                      </div>
-                      <div id="navbarMenuHeroA" class="navbar-menu">
-                          <div class="navbar-end">
-                            <%= link_to "Create New Post", new_post_path, class:'navbar-item' %> 
-                          </div>
-                      </div>
-                  </div>
-              </nav>        
-          </div> 
-          
-          <div class="hero-body">
-             <div class="container has-text-centered">
-                  <h1 class="title">
-                      <%= yield :page_title %>
-                  </h1>
+    <section class="hero is-primary is-medium">
+      <div class="hero-head">
+        <nav class="navbar">
+          <div class="container">
+            <div class="navbar-brand">
+              <%= link_to 'Linkoad blog', root_path, class: 'navbar-item' %>
+              <span class="navbar-burger burguer" data-target="navbarMenuHeroA">
+                <span></span>
+                <span></span>
+                <span></span>
+              </span>
+            </div>
+            <div id="navbarMenuHeroA" class="navbar-menu">
+              <% if current_user %>
+              <% else %>
+                <div class="navbar-item">
+                  <%= link_to 'Sign up', new_user_registration_path %>
+                </div>
+                <div class="navbar-item">
+                  <%= link_to 'Sign in', new_user_session_path %>
+                </div>
+              <% end %>
+              <div class="navbar-item">
+                <%= link_to 'Sign out', destroy_user_session_path, method: :delete %>
               </div>
+              <div class="navbar-end">
+                <%= link_to "Create New Post", new_post_path, class:'navbar-item' %> 
+              </div>
+            </div>
           </div>
-      </section>
-        <%= yield %>
+        </nav>
+      </div>
+
+      <div class="hero-body">
+        <div class="container has-text-centered">
+          <h1 class="title">
+            <%= yield :page_title %>
+          </h1>
+        </div>
+      </div>
+    </section>
+    <%= yield %>
   </body>
 </html>
